@@ -1,5 +1,5 @@
 import bs4
-from urllib.request import urlopen as uReq
+from urllib.request import urlopen
 from bs4 import BeautifulSoup as soup
 import pandas
 
@@ -8,12 +8,12 @@ l = [] #create empty list
 for page in range(0,15,1):
     my_url = 'https://www.kijiji.ca/b-sport-bikes/ontario/page-' + str(page) + '/c304l9004?ad=offering&for-sale-by=ownr'
     #opening up connection and grabbing the page
-    uClient = uReq(my_url)
+    uClient = urlopen(my_url)
     #stores html data in variable
     page_html = uClient.read()
     uClient.close()
     #call soup function to parse page_html, store it in a vairable
-    page_soup = soup(page_html, "html.parser")
+    page_soup = BeautifulSoup(page_html, "html.parser")
     #grabs each product
     containers = page_soup.findAll("div", {"class":"info-container"})
 
